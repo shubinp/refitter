@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Refitter.MSBuild\Refitter.MSBuild.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="README.md" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include=".refitter" />
+    </ItemGroup>
+    
+    <UsingTask 
+        TaskName="Refitter.MSBuild.RefitterGenerateTask" 
+        AssemblyFile="..\Refitter.MSBuild\bin\Debug\netstandard2.0\Refitter.MSBuild.dll" />
+    
+    <Target Name="RefitterGenerateTask" BeforeTargets="BeforeBuild">
+        <RefitterGenerateTask />
+    </Target>
+
+</Project>
